@@ -9,8 +9,20 @@ namespace Cadeterias
 
         public List<Cadete> ListaCadetes { get; set; }
 
-        public List<Pedido> ListaPedidos { get; set; }
 
+        public Cadeteria(string nombre, string telefono){
+            Nombre = nombre;
+            Telefono = telefono;
+            ListaCadetes = new();
+        }
 
+        public void AsignarPedido(int idCadete, Pedido pedido){
+            foreach (var cadete in ListaCadetes)
+            {
+                if(idCadete == cadete.Id){
+                    cadete.CargaPedido(pedido);
+                }
+            }
+        }
     }
 }

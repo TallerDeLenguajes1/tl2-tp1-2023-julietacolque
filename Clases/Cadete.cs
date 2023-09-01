@@ -2,15 +2,40 @@ using Pedidos;
 namespace Cadetes
 {
   public class Cadete
+  {
+    public int Id { get; set; }
+    public string Nombre { get; set; }
+
+    public string Telefono { get; set; }
+
+    public List<Pedido> ListaPedidos { get; set; }
+
+    public Cadete(int id, string nombre, string telefono)
     {
-        public int Id {get;set;}
-        public string Nombre { get; set; }
-
-        public string Telefono{get;set;}
-
-        public List<Pedido>ListaPedidos {get;set;}
-
-
+      Id = id;
+      Nombre = nombre;
+      Telefono = telefono;
+      ListaPedidos = new();
     }
 
+    public void CargaPedido(Pedido pedido)
+    {
+      ListaPedidos.Add(pedido);
     }
+    public float JornalACobrar()
+    {
+      float jornal = 500;
+      int entregaRealizada = 0;
+      foreach (var pedido in ListaPedidos)
+      {
+        if (pedido.Estado == Estados.Entregado)
+        {
+          entregaRealizada++;
+        }
+      }
+
+      return jornal * entregaRealizada;
+    }
+  }
+
+}

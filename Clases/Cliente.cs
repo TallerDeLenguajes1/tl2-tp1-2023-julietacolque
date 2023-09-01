@@ -1,12 +1,19 @@
 namespace Clientes
 {
-   public class Cliente
+    public class Cliente
     {
-        public string Nombre{get;set;}
-        public string Telefono{get;set;}
+        public Cliente(string nombre, string telefono, string domicilio)
+        {
+            Nombre = nombre;
+            Telefono = telefono;
+            Domicilio = domicilio;
+        }
 
-        public string Domicilio{get;set;}
+        public string Nombre { get; set; }
+        public string Telefono { get; set; }
 
-       
+        public string Domicilio { get; set; }
+
+
     }
 }
