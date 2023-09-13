@@ -1,0 +1,15 @@
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\tl2-tp1-2023-julietacolque.csproj.AssemblyReference.cache
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\tl2-tp1-2023-julietacolque.GeneratedMSBuildEditorConfig.editorconfig
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\tl2-tp1-2023-julietacolque.AssemblyInfoInputs.cache
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\tl2-tp1-2023-julietacolque.AssemblyInfo.cs
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\tl2-tp1-2023-julietacolque.csproj.CoreCompileInputs.cache
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\bin\Debug\net7.0\tl2-tp1-2023-julietacolque.exe
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\bin\Debug\net7.0\tl2-tp1-2023-julietacolque.deps.json
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\bin\Debug\net7.0\tl2-tp1-2023-julietacolque.runtimeconfig.json
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\bin\Debug\net7.0\tl2-tp1-2023-julietacolque.dll
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\bin\Debug\net7.0\tl2-tp1-2023-julietacolque.pdb
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\tl2-tp1-2023-julietacolque.dll
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\refint\tl2-tp1-2023-julietacolque.dll
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\tl2-tp1-2023-julietacolque.pdb
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\tl2-tp1-2023-julietacolque.genruntimeconfig.cache
+D:\Facultad\2A 2-Cuatrimestre\Taller II\Practicos\tl2-tp1-2023-julietacolque\obj\Debug\net7.0\ref\tl2-tp1-2023-julietacolque.dll
