@@ -10,12 +10,16 @@ namespace Pedidos
 
     public Estados Estado { get; set; }
 
+    public int IdCadete{get;set;}
+
     //constructor
     public Pedido(int id,string observacion, Cliente cliente){
       Id = id;
       Observacion = observacion;
       Cliente = cliente;
       Estado = Estados.EnCurso;
+      IdCadete = -1;
+
     }
 
     public Pedido(){

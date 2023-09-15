@@ -7,7 +7,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        int valor = 1, id, idPedido;
+        int valor = 1, idP,idC;
         var carga = new CargarDato();
         var cadeteria = carga.Datos("Archivos/Cadeteria.csv");
         carga.CargarCadetes("Archivos/Cadete.csv", cadeteria);
@@ -17,43 +17,46 @@ internal class Program
         while (valor != 0)
         {
 
-            Console.WriteLine("-----MENU-----\n1.Asignar pedido\n2.Cambiar de estado\n3.Reasignar pedido\n4.Jornal a cobrar\n5.Generar Informe\nIngrese la opcion:");
+            Console.WriteLine("-----MENU-----\n1.Crear pedido\n2.Asignar pedido\n3.Cambiar de estado\n4.Reasignar pedido\n5.Jornal a cobrar\n6.Generar Informe\nIngrese la opcion:");
             valor = Convert.ToInt32(Console.ReadLine());
 
             switch (valor)
             {
-
                 case 1:
-                    Console.WriteLine("\nASIGNAR PEDIDO\n");
-                    Console.WriteLine("Ingrese el id del cadete: ");
-                    id = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine(cadeteria.AsignarPedido(id, CargaPedido(cadeteria)));
+                    Console.WriteLine("\nCREAR PEDIDO\n");
+                    Console.WriteLine(cadeteria.AñadirPedido(CargaPedido(cadeteria)));
                     break;
                 case 2:
-                    Console.WriteLine("\nCAMBIAR ESTADO\n");
-                    Console.WriteLine("Ingrese el id del Cadete: ");
-                    id = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("\nIngrese el id del Pedido: ");
-                    idPedido = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine(cadeteria.CambiarEstado(idPedido, id, ElegirEstado()));
+                    Console.WriteLine("\nASIGNAR PEDIDO\n");
+                    idC = SolicitarIdCadete();
+                    idP = SolicitarIdPedido();
+                    Console.WriteLine(cadeteria.AsignarPedido(idC,idP));
                     break;
                 case 3:
-                    Console.WriteLine("\nREASIGNAR PEDIDO\n");
-
-                    Console.WriteLine(ReasignacionPedido(cadeteria));
+                    Console.WriteLine("\nCAMBIAR ESTADO\n");
+                    idP = SolicitarIdPedido();
+                    Console.WriteLine(cadeteria.CambiarEstado(idP,ElegirEstado()));
                     break;
                 case 4:
-                    Console.WriteLine("\nJORNAL A COBRAR CADETE \n");
-                    Console.WriteLine("Ingrese el id del Cadete: ");
-                    id = Convert.ToInt32(Console.ReadLine());
-                     var cadeteBuscado = cadeteria.BuscarCadete(id);
-                     if(cadeteBuscado.Count()>0){
-                       Console.WriteLine($"\nJornal a cobrar: {cadeteBuscado[0].JornalACobrar()}\n");
-                     }
+                    Console.WriteLine("\nREASIGNAR PEDIDO\n");
+                    idC = SolicitarIdCadete(); //nuevo cadete
+                    idP = SolicitarIdPedido();
+                    Console.WriteLine(cadeteria.ReasignarPedido(idP,idC));
                     break;
-                case 5: Console.WriteLine("\nInforme\n");
-                        Console.WriteLine(cadeteria.GenerarInforme());
-                break;
+                case 5:
+                    Console.WriteLine("\nJORNAL A COBRAR CADETE \n");
+                    idC = SolicitarIdCadete();
+                    var cadeteBuscado = cadeteria.BuscarCadete(idC);
+                    if (cadeteBuscado.Count() > 0)
+                    {
+                        Console.WriteLine($"\nJornal a cobrar: {cadeteria.JornalACobrar(idC)}\n");
+                    }
+                    break;
+                case 6:
+                    Console.WriteLine("\nInforme\n");
+                     idC = SolicitarIdCadete();
+                    Console.WriteLine(cadeteria.GenerarInforme(idC));
+                    break;
             }
 
             Console.WriteLine("\nDesea continuar?:  ");
@@ -64,10 +67,24 @@ internal class Program
 
     }
 
+    public static int SolicitarIdCadete()
+    {   int id;
+        Console.WriteLine("Ingrese el id del Cadete: ");
+        id = Convert.ToInt32(Console.ReadLine());
+        return id;
+
+    }
+     public static int SolicitarIdPedido()
+    {   int id;
+        Console.WriteLine("Ingrese el id del pedido: ");
+        id = Convert.ToInt32(Console.ReadLine());
+        return id;
+
+    }
     public static Cliente CargaCliente(Cadeteria cadeteria)
     {
         string nombre, telefono, domicilio, datos;
-        System.Console.WriteLine("\n-.....CARGA CLIENTE.....-\n");
+        Console.WriteLine("\n-.....CARGA CLIENTE.....-\n");
         Console.WriteLine("Nombre: ");
         nombre = Console.ReadLine();
         Console.WriteLine("\nTelefono:");
@@ -113,31 +130,8 @@ internal class Program
 
 
     }
-    public static string ReasignacionPedido(Cadeteria cadeteria)
-    {
-        int id, idPedido;
-        List<Cadete> cadete;
-        do
-        {
-            Console.WriteLine("\nIngrese el id del Cadete para remover el pedido: ");
-            id = Convert.ToInt32(Console.ReadLine());
-            cadete = cadeteria.BuscarCadete(id);
-        }
 
-        while (cadete.Count() == 0);
-
-
-        Console.WriteLine("\nIngrese el id del NUEVO Cadete: ");
-        id = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine("\nIngrese el id del Pedido: ");
-        idPedido = Convert.ToInt32(Console.ReadLine());
-
-        return cadeteria.ReasignarPedido(idPedido, cadete[0], id);
-
-    }
 }
-//tp2
-//tp2
-//tp2
+
 
 
