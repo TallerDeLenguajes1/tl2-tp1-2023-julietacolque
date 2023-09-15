@@ -17,7 +17,7 @@ internal class Program
         while (valor != 0)
         {
 
-            Console.WriteLine("-----MENU-----\n1.Asignar pedido\n2.Cambiar de estado\n3.Reasignar pedido\n4.Jornal a cobrar\nIngrese la opcion:");
+            Console.WriteLine("-----MENU-----\n1.Asignar pedido\n2.Cambiar de estado\n3.Reasignar pedido\n4.Jornal a cobrar\n5.Generar Informe\nIngrese la opcion:");
             valor = Convert.ToInt32(Console.ReadLine());
 
             switch (valor)
@@ -50,9 +50,10 @@ internal class Program
                      if(cadeteBuscado.Count()>0){
                        Console.WriteLine($"\nJornal a cobrar: {cadeteBuscado[0].JornalACobrar()}\n");
                      }
-
-
                     break;
+                case 5: Console.WriteLine("\nInforme\n");
+                        Console.WriteLine(cadeteria.GenerarInforme());
+                break;
             }
 
             Console.WriteLine("\nDesea continuar?:  ");

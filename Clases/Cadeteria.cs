@@ -34,12 +34,12 @@ namespace Cadeterias
         }
         public string AsignarPedido(int idCadete, Pedido pedido)
         {
-           string respuesta = "Algo fallo el pedido no fue asignado";
+            string respuesta = "Algo fallo el pedido no fue asignado";
             foreach (var cadete in ListaCadetes)
             {
                 if (idCadete == cadete.Id)
-                {   
-                    respuesta  = "Asignado con exito";
+                {
+                    respuesta = "Asignado con exito";
                     cadete.CargaPedido(pedido);
                 }
             }
@@ -64,7 +64,7 @@ namespace Cadeterias
 
         // BUSCAR UN CADETE PRIMERO ES DECIR EN EL MAIN DEBO PREGUNTAR CUAL ES EL ID DEL CADETE AL QUE LE QUIERO SACAR EL PEDIDO.
         {
-            
+
             string respuesta = AsignarPedido(idCadeteNuevo, cadete.RemoverPedido(idPedido));
             return respuesta;
 
@@ -75,15 +75,27 @@ namespace Cadeterias
             ListaCadetes.Add(cadete);
         }
 
-        public List<Cadete> BuscarCadete(int idCadete){
-            var cadetes = ListaCadetes.Where(x=>x.Id == idCadete).ToList();
+        public List<Cadete> BuscarCadete(int idCadete)
+        {
+            var cadetes = ListaCadetes.Where(x => x.Id == idCadete).ToList();
             return cadetes;
 
+        }
+        public string GenerarInforme()
+        {
+            string informe = "";
+            foreach (var cadete in ListaCadetes)
+            {
+                var pedidos = cadete.ListaPedidos.Where(x => x.Estado == Estados.Entregado).ToList();
+                informe = $"ID:{cadete.Id}\nPedidos Realizados:{pedidos.Count()}\nJornal:{cadete.JornalACobrar()}\n" + informe;
+            }
+            return informe;
         }
     }
 }
 
-/*
-Cadeteria.CrearPedido(parametros de pedido)
-Cadeteria.AsignarPedido(idCadete, idPedido)
-*/
+//  Mostrar un informe de pedidos al finalizar la jornada que incluya el monto ganado
+// y la cantidad de envíos de cada cadete y el total. Muestre también la cantidad de
+// envíos promedio por cadete.
+
+// recorro la lista de cadetes, de cada cadete hago un select que me diga cuantos pedidos realizo
