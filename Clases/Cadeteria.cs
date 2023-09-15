@@ -9,10 +9,11 @@ namespace Cadeterias
         public string Telefono { get; set; }
 
         public List<Cadete> ListaCadetes { get; set; }
+        public List<Pedido> ListaPedidos { get; set; }
 
         public Cadeteria()
         {
-
+            ListaPedidos = new();
             ListaCadetes = new();
         }
 
@@ -21,6 +22,7 @@ namespace Cadeterias
             Nombre = nombre;
             Telefono = telefono;
             ListaCadetes = new();
+            ListaPedidos = new();
         }
         public Cliente CrearCliente(string nombre, string telefono, string domicilio, string datosRef)
         {
@@ -32,40 +34,38 @@ namespace Cadeterias
             var pedido = new Pedido(id, obs, cliente);
             return pedido;
         }
-        public string AsignarPedido(int idCadete, Pedido pedido)
-        {
+        public string AsignarPedido(int idCadete, int idPedido)
+        {//ponerle al pedido el id del cadete, nada mas
             string respuesta = "Algo fallo el pedido no fue asignado";
-            foreach (var cadete in ListaCadetes)
+            foreach (var pedido in ListaPedidos)
             {
-                if (idCadete == cadete.Id)
+                if (pedido.Id == idPedido)
                 {
-                    respuesta = "Asignado con exito";
-                    cadete.CargaPedido(pedido);
+                    pedido.IdCadete = idCadete;
+                    respuesta = "Pedido Asignado";
                 }
             }
             return respuesta;
         }
 
-        public string CambiarEstado(int idPedido, int idCadete, Estados estado)
+        public string CambiarEstado(int idPedido, Estados estado)
         {
             string res = "pedido o cadete no encontrado";
-            foreach (var cadete in ListaCadetes)
+            foreach (var pedido in ListaPedidos)
             {
-                if (cadete.Id == idCadete)
+                if (pedido.Id == idPedido)
                 {
-                    cadete.CambiarEstadoPedido(idPedido, estado);
+                    pedido.Estado = estado;
                     res = $"El estado del pedido {idPedido} ha sido modificado";
                     break;
                 }
             }
             return res;
         }
-        public string ReasignarPedido(int idPedido, Cadete cadete, int idCadeteNuevo)
-
-        // BUSCAR UN CADETE PRIMERO ES DECIR EN EL MAIN DEBO PREGUNTAR CUAL ES EL ID DEL CADETE AL QUE LE QUIERO SACAR EL PEDIDO.
+        public string ReasignarPedido(int idPedido, int idCadeteNuevo)
         {
 
-            string respuesta = AsignarPedido(idCadeteNuevo, cadete.RemoverPedido(idPedido));
+            string respuesta = AsignarPedido(idCadeteNuevo, idPedido);
             return respuesta;
 
         }
@@ -74,6 +74,20 @@ namespace Cadeterias
         {
             ListaCadetes.Add(cadete);
         }
+        public string AñadirPedido(Pedido pedido)
+        {
+            string res = "Añadido con exito";
+            if (pedido != null)
+            {
+                ListaPedidos.Add(pedido);
+            }
+            else
+            {
+                res = "No pudo ser añadido el pedido";
+            }
+            return res;
+
+        }
 
         public List<Cadete> BuscarCadete(int idCadete)
         {
@@ -81,21 +95,39 @@ namespace Cadeterias
             return cadetes;
 
         }
-        public string GenerarInforme()
+
+        public float JornalACobrar(int idCadete)
         {
-            string informe = "";
-            foreach (var cadete in ListaCadetes)
+            float jornal = 500;
+            int entregaRealizada = 0;
+            foreach (var pedido in ListaPedidos)
             {
-                var pedidos = cadete.ListaPedidos.Where(x => x.Estado == Estados.Entregado).ToList();
-                informe = $"ID:{cadete.Id}\nPedidos Realizados:{pedidos.Count()}\nJornal:{cadete.JornalACobrar()}\n" + informe;
+                if (pedido.Estado == Estados.Entregado && pedido.IdCadete == idCadete)
+                {
+                    entregaRealizada++;
+                }
             }
+
+            return jornal * entregaRealizada;
+        }
+
+
+        public string GenerarInforme(int idC)
+        {
+            string informe = $"IdCadete:{idC}\nPedidos:0\nJornal:0\n";
+
+            var pedidos = ListaPedidos.Where(x => x.Estado == Estados.Entregado && x.IdCadete == idC).ToList(); //en la lista de pedidos busca aquellos que esten realizadosy ademas coincida cn el id del cadete.
+
+            if (pedidos.Count() > 0)
+            {
+
+                informe = $"ID:{pedidos[0].IdCadete}\nPedidos:{pedidos.Count()}\nJornal:{JornalACobrar(idC)}\n";
+
+            }
+
+
             return informe;
         }
     }
+
 }
-
-//  Mostrar un informe de pedidos al finalizar la jornada que incluya el monto ganado
-// y la cantidad de envíos de cada cadete y el total. Muestre también la cantidad de
-// envíos promedio por cadete.
-
-// recorro la lista de cadetes, de cada cadete hago un select que me diga cuantos pedidos realizo
