@@ -1,5 +1,4 @@
 using Pedidos;
-using Cadetes;
 using Clientes;
 namespace Cadeterias
 {

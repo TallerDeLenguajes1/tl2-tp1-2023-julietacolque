@@ -1,5 +1,5 @@
 using Pedidos;
-namespace Cadetes
+namespace Cadeterias
 {
   public class Cadete
   {

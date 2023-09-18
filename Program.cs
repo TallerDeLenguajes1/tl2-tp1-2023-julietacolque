@@ -1,18 +1,36 @@
-﻿using Cadetes;
-using Pedidos;
+﻿using Pedidos;
 using Cadeterias;
 using CargarDatos;
 using Clientes;
+using Datos;
+
 internal class Program
 {
     private static void Main(string[] args)
     {
-        int valor = 1, idP,idC;
-        var carga = new CargarDato();
-        var cadeteria = carga.Datos("Archivos/Cadeteria.csv");
-        carga.CargarCadetes("Archivos/Cadete.csv", cadeteria);
+        int valor = 1, idP, idC, opcDatos;
+        var cadeteria = new Cadeteria();
 
+        do
+        {
+            Console.WriteLine("Como desea cargar los datos: ");
+            Console.WriteLine("1-CSV ");
+            Console.WriteLine("2-JSON ");
+            opcDatos = Convert.ToInt32(Console.ReadLine());
+        } while (opcDatos != 1 && opcDatos != 2);
 
+        if (opcDatos == 1)
+        {
+
+            var carga = new CargarDato();
+            cadeteria = carga.Datos("Archivos/Cadeteria.csv");
+            carga.CargarCadetes("Archivos/Cadete.csv", cadeteria);
+        }
+        else
+        {
+            var accesoJson = new AccesoJson();
+            cadeteria = accesoJson.AccederCadeteria("Archivos/Cadeteria.json", cadeteria);
+        }
 
         while (valor != 0)
         {
@@ -30,18 +48,18 @@ internal class Program
                     Console.WriteLine("\nASIGNAR PEDIDO\n");
                     idC = SolicitarIdCadete();
                     idP = SolicitarIdPedido();
-                    Console.WriteLine(cadeteria.AsignarPedido(idC,idP));
+                    Console.WriteLine(cadeteria.AsignarPedido(idC, idP));
                     break;
                 case 3:
                     Console.WriteLine("\nCAMBIAR ESTADO\n");
                     idP = SolicitarIdPedido();
-                    Console.WriteLine(cadeteria.CambiarEstado(idP,ElegirEstado()));
+                    Console.WriteLine(cadeteria.CambiarEstado(idP, ElegirEstado()));
                     break;
                 case 4:
                     Console.WriteLine("\nREASIGNAR PEDIDO\n");
                     idC = SolicitarIdCadete(); //nuevo cadete
                     idP = SolicitarIdPedido();
-                    Console.WriteLine(cadeteria.ReasignarPedido(idP,idC));
+                    Console.WriteLine(cadeteria.ReasignarPedido(idP, idC));
                     break;
                 case 5:
                     Console.WriteLine("\nJORNAL A COBRAR CADETE \n");
@@ -54,7 +72,7 @@ internal class Program
                     break;
                 case 6:
                     Console.WriteLine("\nInforme\n");
-                     idC = SolicitarIdCadete();
+                    idC = SolicitarIdCadete();
                     Console.WriteLine(cadeteria.GenerarInforme(idC));
                     break;
             }
@@ -68,14 +86,16 @@ internal class Program
     }
 
     public static int SolicitarIdCadete()
-    {   int id;
+    {
+        int id;
         Console.WriteLine("Ingrese el id del Cadete: ");
         id = Convert.ToInt32(Console.ReadLine());
         return id;
 
     }
-     public static int SolicitarIdPedido()
-    {   int id;
+    public static int SolicitarIdPedido()
+    {
+        int id;
         Console.WriteLine("Ingrese el id del pedido: ");
         id = Convert.ToInt32(Console.ReadLine());
         return id;

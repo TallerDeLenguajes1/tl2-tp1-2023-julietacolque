@@ -1,6 +1,5 @@
-using System.Numerics;
 using Cadeterias;
-using Cadetes;
+// using Cadetes;
 namespace CargarDatos
 {
     public class CargarDato
