@@ -59,7 +59,7 @@ namespace Datos
             }
             return cadeteria;
         }
-        public void AccederCadetes(string path, Cadeteria cadeteria)
+        private void AccederCadetes(string path, Cadeteria cadeteria)
         {
             string linea, delimitador = ",";
             string[] cadena;

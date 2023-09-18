@@ -22,9 +22,9 @@ internal class Program
         if (opcDatos == 1)
         {
 
-            var carga = new CargarDato();
-            cadeteria = carga.Datos("Archivos/Cadeteria.csv");
-            carga.CargarCadetes("Archivos/Cadete.csv", cadeteria);
+            var carga = new AccesoCSV();
+            cadeteria = carga.AccederCadeteria("Archivos/Cadeteria.csv",cadeteria);
+         
         }
         else
         {
